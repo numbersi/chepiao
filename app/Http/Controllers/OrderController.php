@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-
-
-
-
     public function payT(Request $request)
     {
         $tid = $request->tid ? $request->tid :1 ;

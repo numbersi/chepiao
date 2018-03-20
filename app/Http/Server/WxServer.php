@@ -14,6 +14,7 @@ use App\common;
 use App\Order;
 use App\User;
 use app\Wechat\WxPayNotify;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,7 +37,7 @@ class WxServer extends WxPayNotify
             Storage::disk('local')->put('order1.txt',$order);
             if ($order) {
                 $order->token = $token;
-                $order->pay_at = time();
+                $order->pay_at =  Carbon::now()->format('Y-m-d H:i:s');
                 Storage::disk('local')->put('order2.txt',$order);
                 $order->save();
                 $this->senMoMessage($order);
