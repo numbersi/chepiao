@@ -22,7 +22,7 @@ class OrderController extends Controller
         $t_count = $request->count ? $request->count :1 ;
         $t = Ticket::find($tid);
         $order = $this->createOrder($t,$t_count);
-        $wxPay = new wxPayServer($order->order_no,$order->total_price,$t->title."车票",'http://baidu.com',$order);
+        $wxPay = new wxPayServer($order->order_no,$order->total_price,$t->title."车票",'https//',$order);
         return $wxPay->PaySignature();
     }
 
@@ -42,7 +42,6 @@ class OrderController extends Controller
 
        $orderNo  = $this->getOrderNo();
        $order = new  Order();
-        $order->token = encrypt('NumberSi0102' . $orderNo);
 
         $order->order_no = $orderNo;
         $order->user_id =  Auth::user()->id;

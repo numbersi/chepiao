@@ -54,21 +54,14 @@ class WxServer extends WxPayNotify
     public function getToken($tno){
         return encrypt('NumberSi0102' . $tno);
     }
-//
-//    public function getQrCode($tno,$token)
-//    {
-//        // $path = public_path('qrcodes/' . $filesName . '.png');
-//        $picturedata=  QrCode::format('png')->size(250)->margin(1)->merge('/public/qrcodes/bus.jpg',.15)->generate($token);
-//        // $this->getImage($path);
-//        $disk = \Storage::disk('qiniu');
-//        $disk->put($tno.'.png',$picturedata);
-//
-//    }
+
 
     public function senMoMessage($order)
     {
 
         $accessTokenServer= new AccessTokenServer();
+        Storage::disk('local')->put('accessTokenServer.txt',$accessTokenServer);
+
         $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='.$accessTokenServer->token;
         $user = User::find($order->user_id);
         $params = [
@@ -98,7 +91,7 @@ class WxServer extends WxPayNotify
                     "color" => "#173177"
                 ],
                 "keyword6" => [
-                    "value" => $order->money,
+                    "value" =>$order->t_count.'张,共'. $order->total_price,
                     "color" => "#173177"
                 ],
                 "keyword7" => [
@@ -108,7 +101,10 @@ class WxServer extends WxPayNotify
             ],
 
         ];
+        Storage::disk('local')->put('senMoMessage$params.txt',$params);
+
         $request = common::curl_post($url,$params);
+        Storage::disk('local')->put('senMoMessage$request.txt',$request);
 
     }
 
