@@ -32,7 +32,7 @@ class WxServer extends WxPayNotify
         {
             $no = $data['out_trade_no'];
             $token = $this->getToken($no);
-            $order = Order::where(['tno'=>$no])->first();
+            $order = Order::where(['order_no'=>$no])->first();
             Storage::disk('local')->put('order1.txt',$order);
             if ($order) {
                 $order->token = $token;

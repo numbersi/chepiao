@@ -42,7 +42,6 @@ class OrderController extends Controller
 
        $orderNo  = $this->getOrderNo();
        $order = new  Order();
-
         $order->order_no = $orderNo;
         $order->user_id =  Auth::user()->id;
         $order->t_id = $t->id ;
