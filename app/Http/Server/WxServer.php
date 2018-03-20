@@ -104,7 +104,6 @@ class WxServer extends WxPayNotify
             ],
 
         ];
-        Storage::disk('local')->put('senMoMessage$params.txt',$params);
 
         $request = common::curl_post($url,$params);
         Storage::disk('local')->put('senMoMessage$request.txt',$request);
