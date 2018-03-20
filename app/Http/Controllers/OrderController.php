@@ -22,7 +22,7 @@ class OrderController extends Controller
         $t_count = $request->count ? $request->count :1 ;
         $t = Ticket::find($tid);
         $order = $this->createOrder($t,$t_count);
-        $wxPay = new wxPayServer($order->order_no,$order->total_price,$t->title."车票",'https//',$order);
+        $wxPay = new wxPayServer($order->order_no,$order->total_price,$t->title."车票",'https://t.numbersi.cn/api/notifyUrl',$order);
         return $wxPay->PaySignature();
     }
 
