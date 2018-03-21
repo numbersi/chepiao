@@ -22,39 +22,29 @@ class WxServer extends WxPayNotify
 {
 
 
-
-
     public function NotifyProcess($data, &$msg)
     {
-        Log::info('This is some useful information.');
 
-        Storage::disk('local')->put('file1.txt',"支付完成调用了");
-        if ($data['result_code'] == 'SUCCESS')
-        {
+        if ($data['result_code'] == 'SUCCESS') {
             $no = $data['out_trade_no'];
             $token = $this->getToken($no);
-            $order = Order::where(['order_no'=>$no])->first();
-            Storage::disk('local')->put('order1.txt',$order);
+            $order = Order::where(['order_no' => $no, 'pay_at' => null])->first();
             if ($order) {
                 $order->token = $token;
-                $order->pay_at =  Carbon::now()->format('Y-m-d H:i:s');
-                Storage::disk('local')->put('order2.txt',$order);
+                $order->pay_at = Carbon::now()->format('Y-m-d H:i:s');
                 $order->save();
                 $this->senMoMessage($order);
-                Storage::disk('local')->put('file.txt',$order);
-            }else{
-                Storage::disk('local')->put('没有.txt','没有');
+            } else {
+                return true;
             }
-            Storage::disk('local')->put('token.txt',$token);
-        }
-        else
-        {
+        } else {
             return true;
         }
 
     }
 
-    public function getToken($tno){
+    public function getToken($tno)
+    {
         return encrypt('NumberSi0102' . $tno);
     }
 
@@ -62,10 +52,10 @@ class WxServer extends WxPayNotify
     public function senMoMessage($order)
     {
 
-        $accessTokenServer= new AccessTokenServer();
-        Storage::disk('local')->put('accessTokenServer.txt',$accessTokenServer);
+        $accessTokenServer = new AccessTokenServer();
+        Storage::disk('local')->put('accessTokenServer.txt', $accessTokenServer);
 
-        $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='.$accessTokenServer->token;
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' . $accessTokenServer->token;
         $user = User::find($order->user_id);
         $params = [
             'touser' => $user->openid,
@@ -94,7 +84,7 @@ class WxServer extends WxPayNotify
                     "color" => "#173177"
                 ],
                 "keyword6" => [
-                    "value" =>$order->t_count.'张,共'. $order->total_price,
+                    "value" => $order->t_count . '张,共' . $order->total_price . ' 元',
                     "color" => "#173177"
                 ],
                 "keyword7" => [
@@ -105,8 +95,7 @@ class WxServer extends WxPayNotify
 
         ];
 
-        $request = common::curl_post($url,$params);
-        Storage::disk('local')->put('senMoMessage$request.txt',$request);
+        common::curl_post($url, $params);
 
     }
 

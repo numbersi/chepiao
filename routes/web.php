@@ -47,5 +47,6 @@ Route::group([
         $router::post('/getOrderByUser', 'OrderController@getOrderByUser');
         $router::post('/getChecked', 'CheckOrderController@getChecked');
         $router::post('/checkTicket', 'CheckOrderController@checkTicket');
+        $router::post('/getPhone', 'WeChatController@getPhone');
     });
 });
