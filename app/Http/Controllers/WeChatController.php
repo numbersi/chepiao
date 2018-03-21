@@ -29,8 +29,7 @@ class WeChatController extends Controller
         if (!$user->phoneNumber) {
             $iv = $request->iv;
             $encryptedData = $request->encryptedData;
-            $code = $request->code;
-            $ut = new WxXcx($code);
+            $ut = new WxXcx($request);
             $sessionKey = $ut->getSessionKey();
 
             $pc = new WXBizDataCrypt($ut->wxAppID, $sessionKey);
