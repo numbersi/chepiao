@@ -31,7 +31,6 @@ class WeChatController extends Controller
             $encryptedData = $request->encryptedData;
             $ut = new WxXcx($request);
             $sessionKey = $ut->getSessionKey();
-
             $pc = new WXBizDataCrypt($ut->wxAppID, $sessionKey);
             $errCode = $pc->decryptData($encryptedData, $iv, $data);
             if ($errCode == 0) {
