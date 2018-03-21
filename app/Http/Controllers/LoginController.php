@@ -31,5 +31,10 @@ class LoginController extends Controller
                 'categories' => []
         ],200);
     }
+
+    public function getUserInfo()
+    {
+        return response()->json(['getUserInfo' => Auth::user()]);
+    }
 }
 

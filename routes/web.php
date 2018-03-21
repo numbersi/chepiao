@@ -42,7 +42,7 @@ Route::group([
     $router::group([
         'middleware'=>('refresh.token')
     ], function ($router) {
-        $router::post('/getInfo', 'LoginController@getInfo');
+        $router::post('/getUserInfo', 'LoginController@getUserInfo');
         $router::post('/payT', 'OrderController@payT');
         $router::post('/getOrderByUser', 'OrderController@getOrderByUser');
         $router::post('/getChecked', 'CheckOrderController@getChecked');
