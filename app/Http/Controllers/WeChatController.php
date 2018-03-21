@@ -21,8 +21,6 @@ class WeChatController extends Controller
         $wxServer->Handle();
     }
 
-
-    //
     public function getPhone(Request $request)
     {
         $user = Auth::user();
