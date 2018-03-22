@@ -35,12 +35,11 @@ class WeChatController extends Controller
                 $data = json_decode($data, true);
                 $user->phoneNumber =  $data['phoneNumber'];
                 $user->save();
-                return response()->json(['status' => true, 'userinfo' => $user,]);
             } else {
                 return response()->json(['status' => false, 'errCode' => $errCode]);
             }
         }
-        return response()->json(['status' => true, 'phoneNumber' => $user->phoneNumber,]);
+        return response()->json(['status' => true, 'userinfo' => $user,]);
 
 
     }
