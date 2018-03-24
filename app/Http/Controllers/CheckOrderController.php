@@ -37,7 +37,7 @@ class CheckOrderController extends Controller
 
         if ($token) {
             $s = decrypt($token);
-            $no = str_after( $s ,'Numbersi0102');
+            $no = str_after( $s ,'NumberSi0102');
 
             $order = Order::where('order_no',$no)->first();
             if ($order) {
