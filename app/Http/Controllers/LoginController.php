@@ -36,8 +36,7 @@ class LoginController extends Controller
     {
 
         $user = Auth::user();
-        $user = $user->with('role');
-        return response()->json(['userInfo' =>$user]);
+        return response()->json(['userInfo' => Auth::user()]);
     }
 }
 
