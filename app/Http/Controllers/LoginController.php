@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Server\WxXcx;
+use App\User;
 use function Composer\Autoload\includeFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,6 @@ class LoginController extends Controller
     {
         $xcx = new WxXcx($request);
         $token = $xcx->login();
-        Auth::user();
         return response()->json([
             'token' => $token,
             'userInfo' => Auth::user(),
@@ -36,7 +36,8 @@ class LoginController extends Controller
     {
 
         $user = Auth::user();
-        return response()->json(['userInfo' => Auth::user()]);
+        $user = User::with('role')->find($user->id);
+        return response()->json(['userInfo' =>$user]);
     }
 }
 
