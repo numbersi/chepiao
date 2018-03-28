@@ -44,7 +44,7 @@ class OrderController extends Controller
         $order->t_count = $t_count ;
         $order->origin_price = $t->origin_price ;
         $order->current_price = $t->current_price ;
-        $order->total_price = $t->current_price * $t_count ;
+        $order->total_price =    number_format($t->current_price * $t_count, 2) ;
 
         $order->save();
         return $order;
