@@ -25,7 +25,7 @@ class CheckOrderController extends Controller
         $user = Auth::user();
         $checkOrders = $user->checkOrders;
         $moneyCount = $checkOrders->sum('total_price');
-        $numsCount = $checkOrders->sum('total_price');
+        $numsCount = $checkOrders->sum('t_count');
         return [
             'checkOrders' => $checkOrders,
             'moneyCount' => $moneyCount,
