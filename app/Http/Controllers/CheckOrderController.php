@@ -25,9 +25,11 @@ class CheckOrderController extends Controller
         $user = Auth::user();
         $checkOrders = $user->checkOrders;
         $moneyCount = $checkOrders->sum('total_price');
+        $numsCount = $checkOrders->sum('total_price');
         return [
             'checkOrders' => $checkOrders,
-            'moneyCount' => $moneyCount
+            'moneyCount' => $moneyCount,
+            'numsCount' => $numsCount,
         ];
     }
     public function checkTicket(Request $request)
@@ -53,8 +55,10 @@ class CheckOrderController extends Controller
                 $order->status = 1;
                 $order->checker_id = $user->id;
                 $order->checked_at = Carbon::now()->format('Y-m-d H:i:s');
+                $r = array_add($list = $this->getcheckedList(), 'status', true);
+                $r = array_add($r, 'message', '验票成功');
                 if ($order->save()) {
-                    return response()->json(array_add($list = $this->getcheckedList(), 'status', true));
+                    return response()->json($r);
                 }
             }else{
                 return response()->json( ['status'=>false,
