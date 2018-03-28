@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,14 @@ class CheckOrderController extends Controller
         $token = $request->token;
 
         if ($token) {
-            $s = decrypt($token);
+            try{
+                $s = decrypt($token);
+
+            }catch (DecryptException $e){
+                return response()->json( ['status'=>false,
+                    'message' => '查无此票,请注意',
+                ]);
+            }
             $no = str_after( $s ,'NumberSi0102');
 
             $order = Order::where('order_no',$no)->first();
