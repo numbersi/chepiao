@@ -57,6 +57,7 @@ class CheckOrderController extends Controller
                 $order->checked_at = Carbon::now()->format('Y-m-d H:i:s');
                 $r = array_add($list = $this->getcheckedList(), 'status', true);
                 $r = array_add($r, 'message', '验票成功');
+                $r = array_add($r, 'user', $order->user);
                 if ($order->save()) {
                     return response()->json($r);
                 }
