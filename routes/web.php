@@ -11,10 +11,10 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
+
 Route::get('/', function () {
-   $user = App\User::first();
-    dd(auth()->login($user));
-    return view('welcome');
+    App::abort(404);
 });
 Route::get('/token', function () {
 
