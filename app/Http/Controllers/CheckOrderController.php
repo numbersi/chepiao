@@ -44,7 +44,7 @@ class CheckOrderController extends Controller
 
             }catch (DecryptException $e){
                 return response()->json( ['status'=>false,
-                    'message' => '查无此票,请注意',
+                    'message' => '假票~~~！！！',
                 ]);
             }
             $no = str_after( $s ,'NumberSi0102');
