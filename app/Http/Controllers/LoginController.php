@@ -34,7 +34,10 @@ class LoginController extends Controller
 
     public function getUserInfo()
     {
-        return response()->json(['userInfo' => Auth::user()]);
+
+        $user = Auth::user();
+        $user = $user->with('role');
+        return response()->json(['userInfo' =>$user]);
     }
 }
 
