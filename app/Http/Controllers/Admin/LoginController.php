@@ -19,7 +19,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
         $a = [
             'phone' => '17739388881',
             'password' => "123123",
