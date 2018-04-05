@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function paginate(Request $request)
     {
-        $orders = Order::whereNotNull('pay_at')->with('ticket')->paginate(15);
+        $orders = Order::whereNotNull('pay_at')->with('ticket')->latest('pay_at')->paginate(15);
         return $orders;
     }
 
