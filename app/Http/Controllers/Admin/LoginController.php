@@ -30,6 +30,5 @@ class LoginController extends Controller
                 $token = Auth::guard('staff')->login($r);
             return ['token'=>$token];
         }
-
     }
 }
