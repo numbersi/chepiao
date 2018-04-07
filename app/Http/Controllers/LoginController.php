@@ -15,7 +15,6 @@ class LoginController extends Controller
     public function getToken(Request $request)
     {
         config('auth.defaults.guard');
-        dd(config('auth.defaults.guard'));
         $xcx = new WxXcx($request);
         $token = $xcx->login();
         return response()->json([
