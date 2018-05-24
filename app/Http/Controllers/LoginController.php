@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         $user = auth()->user();
         return response()->json([
-           'contacts' => ['13837028118','13606221357'],
+           'contacts' => ['13837028118','136062213571'],
                 'gonggao' => '',
                 'gzh' => ['微信搜索关注公众号"沙集客运",便捷了解客车资讯,留言乘车意见与建议'],
                 'categories' => []
