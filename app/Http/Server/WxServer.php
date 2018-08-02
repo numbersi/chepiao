@@ -7,8 +7,6 @@
  */
 
 namespace App\Http\Server;
-
-
 use App\Api\Server\AccessTokenServer;
 use App\common;
 use App\Order;
@@ -20,11 +18,8 @@ use Illuminate\Support\Facades\Storage;
 
 class WxServer extends WxPayNotify
 {
-
-
     public function NotifyProcess($data, &$msg)
     {
-
         if ($data['result_code'] == 'SUCCESS') {
             $no = $data['out_trade_no'];
             $token = $this->getToken($no);
@@ -42,16 +37,12 @@ class WxServer extends WxPayNotify
         }
 
     }
-
     public function getToken($tno)
     {
         return encrypt('NumberSi0102' . $tno);
     }
-
-
     public function senMoMessage($order)
     {
-
         $accessTokenServer = new AccessTokenServer();
         Storage::disk('local')->put('accessTokenServer.txt', $accessTokenServer);
 
@@ -88,7 +79,7 @@ class WxServer extends WxPayNotify
                     "color" => "#173177"
                 ],
                 "keyword7" => [
-                    "value" => "乘车旅途中如果遇到问题,请拨打13737028118",
+                    "value" => "乘车旅途中如果遇到问题,请拨打13837028118",
                     "color" => "#173177"
                 ],
             ],
