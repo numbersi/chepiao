@@ -51,7 +51,7 @@ class User extends Authenticatable implements JWTSubject
         $whereParams = [
             'status' => 1,
         ];
-        return $this->orders($whereParams)->whereNotNull('checked_at');
+            return $this->orders($whereParams)->whereNotNull('checked_at');
     }
 
     public function checkOrders()

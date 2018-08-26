@@ -41,7 +41,9 @@
             <div class="desktop-main">
 
                 <div class="order-box">
-                   <p style="color: green;border-bottom-style: solid " > {{$count_num}} 张</p>  <h3 style="color: red;border-bottom-style: solid ">共 {{$count_money}} 元</h3>
+                   <p style="color: black;border-bottom-style: solid " >总共卖出 {{$count_orders}} 张    共 {{$count_orders_money}} 元</p>
+                   <h1 style="color: green;border-bottom-style: solid " > 已经验票 {{$count_orders_c}} 张    共 {{$count_orders_money_c}} 元</h1>
+                   <h2 style="color: red;border-bottom-style: solid " > 没有检票 {{$count_orders_n}} 张    共 {{$count_orders_money_n}} 元</h2>
                     <table cellspacing="0" ng-show="docArr.length>0">
                         <thead>
                             <tr>
