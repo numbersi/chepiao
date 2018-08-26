@@ -39,7 +39,9 @@
                 </ul>
             </div>
             <div class="desktop-main">
+
                 <div class="order-box">
+                   <p style="color: green;border-bottom-style: solid " > {{$count_num}} 张</p>  <h3 style="color: red;border-bottom-style: solid ">共 {{$count_money}} 元</h3>
                     <table cellspacing="0" ng-show="docArr.length>0">
                         <thead>
                             <tr>

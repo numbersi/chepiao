@@ -19,13 +19,9 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $a = [
-            'phone' => '17739388881',
-            'password' => "123123",
 
-        ];
-        $r =Staff::where(['phone' => '17739388881'])->first();
-        $password = "123123";
+        $r =Staff::where(['phone' => $request['phone']])->first();
+        $password = $request['password'];
         if (decrypt($r->password )== $password) {
                 $token = Auth::guard('staff')->login($r);
             return ['token'=>$token];

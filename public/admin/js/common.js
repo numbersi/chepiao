@@ -19,12 +19,10 @@ window.base={
                 params.sCallback && params.sCallback(res);
             },
             error:function(res){
-
                 params.eCallback && params.eCallback(res);
             }
         });
     },
-
     setLocalStorage:function(key,val){
         var exp=new Date().getTime()+2*24*60*60*100;  //令牌过期时间
         var obj={
@@ -33,7 +31,6 @@ window.base={
         };
         localStorage.setItem(key,JSON.stringify(obj));
     },
-
     getLocalStorage:function(key){
         var info= localStorage.getItem(key);
         if(info) {
@@ -47,7 +44,6 @@ window.base={
         }
         return '';
     },
-
     deleteLocalStorage:function(key){
         return localStorage.removeItem(key);
     },

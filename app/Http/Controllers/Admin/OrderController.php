@@ -18,9 +18,7 @@ class OrderController extends Controller
 
     public function check(Request $request)
     {
-
         $user = Auth::guard('staff')->user();
-
         $id = $request->id;
         if ($id) {
             $order  = Order::find($id);
