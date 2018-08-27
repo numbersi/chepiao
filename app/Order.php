@@ -17,4 +17,9 @@ class Order extends Model
     {
         return $this->belongsTo(Ticket::class, 't_id', 'id');
     }
+
+    public function checker()
+    {
+        return $this->belongsTo(User::class,'checker_id','id');
+    }
 }

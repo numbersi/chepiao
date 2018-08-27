@@ -36,7 +36,12 @@ $(function(){
                 str = '', item;
             if(len>0) {
                 for (var i = 0; i < len; i++) {
+                    console.log(item);
                     item = data[i];
+                    var checkerName = ''
+                    if (item.checker) {
+                        checkerName = item.checker.name
+                    }
                     str += '<tr>' +
                         '<td>' + item.order_no + '</td>' +
                         '<td>' + item.ticket.title + '</td>' +
@@ -45,6 +50,7 @@ $(function(){
                         '<td>' + getOrderStatus(item.status) + '</td>' +
                         '<td>' + item.pay_at + '</td>' +
                         '<td data-id="' + item.id + '">' + getBtns(item.status) + '</td>' +
+                        '<td>' +checkerName+ '</td>' +
                         '</tr>';
                 }
             }

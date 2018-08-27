@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function paginate(Request $request)
     {
-        $orders = Order::whereNotNull('pay_at')->with('ticket')->latest('pay_at')->paginate(15);
+        $orders = Order::whereNotNull('pay_at')->with('ticket')->with('checker')->latest('pay_at')->paginate(15);
         return $orders;
     }
 
@@ -37,11 +37,9 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $token = $request->token;
-
         if ($token) {
             try{
                 $s = decrypt($token);
-
             }catch (DecryptException $e){
                 return response()->json( ['status'=>false,
                     'message' => '假票~~~！！！',
